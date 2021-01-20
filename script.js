@@ -20,20 +20,33 @@ function setAnswer(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
 
-function handleClick(event) {
-    event.preventDefault();
-    answer = setAnswer(maxNumber);
-    guesing = number.value;
+function checkAnswer(guesing, answer) {
     guesingAndAnswer.innerText = `You choose: ${guesing}, the answer: ${answer}`;
-    if (guesing == answer) {
+    if (guesing === answer) {
         result.innerText = "You Won!";
     } else {
         result.innerText = "You lost!";
-    }
+    }  
+}
+
+function handleClick(event) {
+    event.preventDefault();
+    if (maxNumber === 0) {
+        guesingAndAnswer.innerText = "Set a max number.";
+    } else {
+        answer = setAnswer(maxNumber);
+        if (number.value !== "") {
+            guesing = Number(number.value);
+            checkAnswer(guesing, answer);
+        } else {
+            guesingAndAnswer.innerText = "Give me a number!";
+            result.innerText = "";
+        }
+    }      
 }
 
 function handleSlide() {
-    maxNumber = range.value;
+    maxNumber = Number(range.value);
     setQuestion(maxNumber);
 }
 
