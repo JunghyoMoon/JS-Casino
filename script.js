@@ -33,6 +33,7 @@ function handleClick(event) {
     event.preventDefault();
     if (maxNumber === 0) {
         guesingAndAnswer.innerText = "Set a max number.";
+        result.innerText = "";
     } else {
         answer = setAnswer(maxNumber);
         if (number.value !== "") {
